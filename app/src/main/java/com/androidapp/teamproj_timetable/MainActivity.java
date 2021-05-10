@@ -8,17 +8,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     CourseFragment fragment1;
     ScheduleFragment fragment2;
 
+    private ListView courseListView;
+    private CourseListAdapter Adapter;
+    private List<Course> courseList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        courseListView = (ListView) findViewById(R.id.courseListView);
+        courseList = new ArrayList<Course>();
+
 
         fragment1 = new CourseFragment();
         fragment2 = new ScheduleFragment();

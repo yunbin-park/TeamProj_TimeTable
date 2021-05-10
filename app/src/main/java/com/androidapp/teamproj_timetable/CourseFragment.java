@@ -1,6 +1,7 @@
 package com.androidapp.teamproj_timetable;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,86 +93,63 @@ public class CourseFragment extends Fragment {
     private Spinner majorSpinner;
 
     private String courseUniversity = "";
-    private String courseYear = "";
-    private String courseTerm = "";
-    private String courseArea = "";
+
+    private ListView courseListView;
+    private CourseListAdapter adapter;
+    private List<Course> courseList;
 
     @Override
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
 
-        final RadioGroup courseUniversityGroup = (RadioGroup) getView().findViewById(R.id.courseUniversityGroup);
         yearSpinner = (Spinner) getView().findViewById(R.id.yearSpinner);
         termSpinner = (Spinner) getView().findViewById(R.id.termSpinner);
         areaSpinner = (Spinner) getView().findViewById(R.id.areaSpinner);
         majorSpinner = (Spinner) getView().findViewById(R.id.majorSpinner);
 
-        courseUniversityGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton courseButton = (RadioButton) getView().findViewById(i);
-                courseUniversity = courseButton.getText().toString();
+        yearAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.year, android.R.layout.simple_spinner_dropdown_item);
+        yearSpinner.setAdapter(yearAdapter);
 
-                yearAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.year, android.R.layout.simple_spinner_dropdown_item);
-                yearSpinner.setAdapter(yearAdapter);
+        termAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.term, android.R.layout.simple_spinner_dropdown_item);
+        termSpinner.setAdapter(termAdapter);
 
-                termAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.term, android.R.layout.simple_spinner_dropdown_item);
-                termSpinner.setAdapter(termAdapter);
-            }
-        });
+        areaAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universityArea, android.R.layout.simple_spinner_dropdown_item);
+        areaSpinner.setAdapter(areaAdapter);
 
-        areaSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.major, android.R.layout.simple_spinner_dropdown_item);
+        termSpinner.setAdapter(majorAdapter);
 
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(areaSpinner.getSelectedItem().equals("전선"))
-                {
-                    majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universitymajorchoice, android.R.layout.simple_spinner_dropdown_item);
-                    majorSpinner.setAdapter(majorAdapter);
-                }
-                if(areaSpinner.getSelectedItem().equals("전심"))
-                {
-                    majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universitymajordeepen, android.R.layout.simple_spinner_dropdown_item);
-                    majorSpinner.setAdapter(majorAdapter);
-                }
-                if(areaSpinner.getSelectedItem().equals("균교"))
-                {
-                    majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universitybalancedculture, android.R.layout.simple_spinner_dropdown_item);
-                    majorSpinner.setAdapter(majorAdapter);
-                }
-                if(areaSpinner.getSelectedItem().equals("교필"))
-                {
-                    majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universitynecessaryculture, android.R.layout.simple_spinner_dropdown_item);
-                    majorSpinner.setAdapter(majorAdapter);
-                }
-                if(areaSpinner.getSelectedItem().equals("일선"))
-                {
-                    majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universityculturechoice, android.R.layout.simple_spinner_dropdown_item);
-                    majorSpinner.setAdapter(majorAdapter);
-                }
-            }
-        });
+        if(areaSpinner.getSelectedItem().equals("전선"))
+        {
+            majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universitymajorchoice, android.R.layout.simple_spinner_dropdown_item);
+            majorSpinner.setAdapter(majorAdapter);
+        }
+        if(areaSpinner.getSelectedItem().equals("전심"))
+        {
+            majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universitymajordeepen, android.R.layout.simple_spinner_dropdown_item);
+            majorSpinner.setAdapter(majorAdapter);
+        }
+        if(areaSpinner.getSelectedItem().equals("균교"))
+        {
+            majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universitybalancedculture, android.R.layout.simple_spinner_dropdown_item);
+            majorSpinner.setAdapter(majorAdapter);
+        }
+        if(areaSpinner.getSelectedItem().equals("교필"))
+        {
+            majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universitynecessaryculture, android.R.layout.simple_spinner_dropdown_item);
+            majorSpinner.setAdapter(majorAdapter);
+        }
+        if(areaSpinner.getSelectedItem().equals("일선"))
+        {
+            majorAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.universityculturechoice, android.R.layout.simple_spinner_dropdown_item);
+            majorSpinner.setAdapter(majorAdapter);
+        }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_course, container, false);
-        Button courseButton = rootView.findViewById(R.id.courseButton);
-        courseButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                activity.onFragmentChange(1);
-            }
-        });
-        return rootView;
-
-/*    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_course, container, false);
-        Button courseButton = (Button) view.findViewById(R.id.courseButton);
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_course, container, false);
-*/     }
+    }
+
 }

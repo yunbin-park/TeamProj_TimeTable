@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "433044097684",
+    "project_id": "teamproj-timetable",
+    "storage_bucket": "teamproj-timetable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433044097684:android:a75a1446c7dfd1fd188281",
+        "android_client_info": {
+          "package_name": "com.androidapp.teamproj_timetable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433044097684-dfvg55ippucvggo8h92nv03dv6m8se7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl8jkZNi9vIDwnn8RHSdCxPW0r0MwPwl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "433044097684-dfvg55ippucvggo8h92nv03dv6m8se7c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
