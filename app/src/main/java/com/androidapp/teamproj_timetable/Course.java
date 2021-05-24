@@ -2,18 +2,18 @@ package com.androidapp.teamproj_timetable;
 
 public class Course {
 
-    int courseID;
-    int courseYear;
-    String courseTerm;
-    String courseArea;
-    String courseMajor;
-    String courseGrade;
-    String courseTitle;
-    int courseCredit;
-    int courseDivide;
-    String courseProfessor;
-    String courseTime;
-    String courseRoom;
+    int courseID; //강의 고유 번호
+    int courseYear; //해당 년도
+    String courseTerm; //해당학기
+    String courseArea; //강의 영역
+    String courseMajor; //해당학과
+    String courseGrade; //해당학년
+    String courseTitle; //강의제목
+    int courseCredit; //강의 학점
+    int courseDivide; //강의 분반
+    String courseProfessor; //강의 교수
+    String courseTime; //강의 시간대
+    String courseRoom; //강의실
 
     public int getCourseID() {
         return courseID;
@@ -109,6 +109,31 @@ public class Course {
 
     public void setCourseRoom(String courseRoom) {
         this.courseRoom = courseRoom;
+    }
+
+    public Course(int courseID, String courseGrade, String courseTitle, int courseCredit, int courseDivide, String courseProfessor, String courseTime) {
+        this.courseID = courseID;
+        this.courseGrade = courseGrade;
+        this.courseTitle = courseTitle;
+        this.courseCredit = courseCredit;
+        this.courseDivide = courseDivide;
+        this.courseProfessor = courseProfessor;
+        this.courseTime = courseTime;
+    }
+
+    public Course(int courseID, String courseGrade, String courseTitle, int courseDivide) {
+        this.courseID = courseID;
+        this.courseGrade = courseGrade;
+        this.courseTitle = courseTitle;
+        this.courseDivide = courseDivide;
+    }
+
+    public Course(int courseID, String courseGrade, String courseTitle, int courseDivide, int courseCredit) {
+        this.courseID = courseID;
+        this.courseGrade = courseGrade;
+        this.courseTitle = courseTitle;
+        this.courseDivide = courseDivide;
+        this.courseCredit=courseCredit;
     }
 
     public Course(int courseID, int courseYear, String courseTerm, String courseArea, String courseMajor, String courseGrade, String courseTitle, int courseCredit, int courseDivide, String courseProfessor, String courseTime, String courseRoom) {

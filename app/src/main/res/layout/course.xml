@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:backgroundTint="#216ef3">
+            android:background="@color/colorPrimaryDark">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 android:id="@+id/courseTime"
                 android:layout_gravity="center"
                 android:padding="3dp"
-                android:textColor="#000000"
+                android:textColor="#4F5873"
                 />
 
         </LinearLayout>

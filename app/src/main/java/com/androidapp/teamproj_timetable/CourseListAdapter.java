@@ -1,11 +1,23 @@
 package com.androidapp.teamproj_timetable;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 public class CourseListAdapter extends BaseAdapter {
@@ -45,14 +57,18 @@ public class CourseListAdapter extends BaseAdapter {
 
         if (courseList.get(i).getCourseGrade().equals("제한 없음") || courseList.get(i).getCourseGrade().equals("")) {
             courseGrade.setText("모든 학년");
-        } else {
-            courseGrade.setText(courseList.get(i).getCourseGrade() + "학년");
+        }
+        else
+        {
+            courseGrade.setText(courseList.get(i).getCourseGrade()+"학년");
         }
         courseTitle.setText(courseList.get(i).getCourseTitle());
-        courseCredit.setText(courseList.get(i).getCourseCredit() + "학점");
-        courseDivide.setText(courseList.get(i).getCourseDivide() + "분반");
+        courseCredit.setText(courseList.get(i).getCourseCredit()+"학점");
+        courseDivide.setText(courseList.get(i).getCourseDivide()+"분반");
+
         courseProfessor.setText(courseList.get(i).getCourseProfessor() + "교수님");
-        courseTime.setText(courseList.get(i).getCourseTime() + "");
+        courseTime.setText(courseList.get(i).getCourseTime()+"");
+
 
         v.setTag(courseList.get(i).getCourseID());
         return v;
